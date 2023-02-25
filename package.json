@@ -3,11 +3,12 @@
   "publisher": "teemal",
   "displayName": "yeetpoint",
   "description": "An extension for working with breakpoints more efficiently.",
+  "icon": "images/yeet-light.png",
   "repository": {
     "type": "git",
     "url": "https://github.com/teemal/yeetpoint.git"
   },
-  "version": "0.0.1",
+  "version": "0.0.2",
   "engines": {
     "vscode": "^1.75.0"
   },

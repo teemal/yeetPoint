@@ -1,7 +1,7 @@
 {
   "name": "yeetpoint",
   "publisher": "teemal",
-  "displayName": "yeetPoint",
+  "displayName": "yeetpoint",
   "description": "An extension for working with breakpoints more efficiently.",
   "version": "0.0.1",
   "engines": {

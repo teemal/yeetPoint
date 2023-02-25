@@ -16,11 +16,19 @@
     "commands": [
       {
         "command": "yeetpoint.addRegex",
-        "title": "yeetPoint: add breakpoints by regex"
+        "title": "yeetpoint: add breakpoints by regex"
       },
       {
         "command": "yeetpoint.removeRegex",
-        "title": "yeetPoint: remove breakpoints by regex"
+        "title": "yeetpoint: remove breakpoints by regex"
+      },
+      {
+        "command": "yeetpoint.removeBelowCurrentLine",
+        "title": "yeetpoint: remove breakpoints below current line"
+      },
+      {
+        "command": "yeetpoint.removeAboveCurrentLine",
+        "title": "yeetpoint: remove breakpoints above current line"
       }
     ]
   },

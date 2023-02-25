@@ -51,7 +51,7 @@ const selectBreakpointsChunked = (pattern: string | undefined) => {
 	}
 };
 
-const findCurrentBreakPoints = (pattern: string | undefined) => {
+const findCurrentBreakPointsPattern = (pattern: string | undefined) => {
 	if (!pattern) { return; }
 	let editor = vscode.window.activeTextEditor;
 	if (!editor) {
@@ -62,12 +62,39 @@ const findCurrentBreakPoints = (pattern: string | undefined) => {
 	const found = vscode.debug.breakpoints.filter(bp => {
 		if (bp instanceof vscode.SourceBreakpoint) {
 			const bpline = bp.location.range.start.line;
-			const {text} = document.lineAt(bpline);
+			const { text } = document.lineAt(bpline);
 			return text.match(pattern) !== null;
 		}
 		return false;
 	});
 	return found;
+};
+
+const findBreakPointsAboveBelowCurrentLine = async (aboveBelow: string) => {
+	let editor = vscode.window.activeTextEditor;
+	if (!editor) {
+		vscode.window.showInformationMessage('Open a file first to manipulate text selections');
+		return;
+	}
+	const currentLine = editor.selection.active.line;
+	if (aboveBelow === 'above') {
+		const found = vscode.debug.breakpoints.filter(bp => {
+			if (bp instanceof vscode.SourceBreakpoint) {
+				return bp.location.range.start.line < currentLine;
+			}
+			return false;
+		});
+		return found;
+	} else {
+		const found = vscode.debug.breakpoints.filter(bp => {
+			if (bp instanceof vscode.SourceBreakpoint) {
+				const isBelow = bp.location.range.start.line > currentLine;
+				return isBelow;
+			}
+			return false;
+		});
+		return found;
+	}
 };
 
 
@@ -85,12 +112,10 @@ export function activate(context: vscode.ExtensionContext) {
 				}
 			});
 	});
-	context.subscriptions.push(addRegexBreakPoints);
-
 	let removeRegexBreakPoints = vscode.commands.registerCommand('yeetpoint.removeRegex', () => {
 		handleInput()
 			.then((pattern) => {
-				return findCurrentBreakPoints(pattern);
+				return findCurrentBreakPointsPattern(pattern);
 			})
 			.then((breakPoints) => {
 				if (breakPoints) {
@@ -98,7 +123,29 @@ export function activate(context: vscode.ExtensionContext) {
 				}
 			});
 	});
+	let removeBelowCurrentLine = vscode.commands.registerCommand('yeetpoint.removeBelowCurrentLine', () => {
+		findBreakPointsAboveBelowCurrentLine('below')
+			.then((breakPoints) => {
+				if (!breakPoints) {
+					return;
+				}
+				vscode.debug.removeBreakpoints(breakPoints);
+			});
+	});
+	let removeAboveCurrentLine = vscode.commands.registerCommand('yeetpoint.removeAboveCurrentLine', () => {
+		findBreakPointsAboveBelowCurrentLine('above')
+			.then((breakPoints) => {
+				if (!breakPoints) {
+					return;
+				}
+				vscode.debug.removeBreakpoints(breakPoints);
+			});
+	});
+
+	context.subscriptions.push(addRegexBreakPoints);
 	context.subscriptions.push(removeRegexBreakPoints);
+	context.subscriptions.push(removeBelowCurrentLine);
+	context.subscriptions.push(removeAboveCurrentLine);
 }
 
 // This method is called when your extension is deactivated

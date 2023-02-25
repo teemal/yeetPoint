@@ -65,8 +65,7 @@ const findCurrentBreakPoints = (pattern: string | undefined) => {
 		if (bp instanceof vscode.SourceBreakpoint) {
 			const bpline = bp.location.range.start.line;
 			const {text} = document.lineAt(bpline);
-			const matcher = text.match(pattern) !== null;
-			return matcher;
+			return text.match(pattern) !== null;
 		}
 		return false;
 	});

@@ -112,6 +112,8 @@ export function activate(context: vscode.ExtensionContext) {
 				}
 			});
 	});
+	context.subscriptions.push(addRegexBreakPoints);
+
 	let removeRegexBreakPoints = vscode.commands.registerCommand('yeetpoint.removeRegex', () => {
 		handleInput()
 			.then((pattern) => {
@@ -123,6 +125,8 @@ export function activate(context: vscode.ExtensionContext) {
 				}
 			});
 	});
+	context.subscriptions.push(removeRegexBreakPoints);
+
 	let removeBelowCurrentLine = vscode.commands.registerCommand('yeetpoint.removeBelowCurrentLine', () => {
 		findBreakPointsAboveBelowCurrentLine('below')
 			.then((breakPoints) => {
@@ -132,6 +136,8 @@ export function activate(context: vscode.ExtensionContext) {
 				vscode.debug.removeBreakpoints(breakPoints);
 			});
 	});
+	context.subscriptions.push(removeBelowCurrentLine);
+	
 	let removeAboveCurrentLine = vscode.commands.registerCommand('yeetpoint.removeAboveCurrentLine', () => {
 		findBreakPointsAboveBelowCurrentLine('above')
 			.then((breakPoints) => {
@@ -141,10 +147,6 @@ export function activate(context: vscode.ExtensionContext) {
 				vscode.debug.removeBreakpoints(breakPoints);
 			});
 	});
-
-	context.subscriptions.push(addRegexBreakPoints);
-	context.subscriptions.push(removeRegexBreakPoints);
-	context.subscriptions.push(removeBelowCurrentLine);
 	context.subscriptions.push(removeAboveCurrentLine);
 }
 

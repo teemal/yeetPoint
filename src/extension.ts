@@ -59,8 +59,6 @@ const findCurrentBreakPoints = (pattern: string | undefined) => {
 		return;
 	}
 	let document = editor.document;
-	let selection = editor.selections[0];
-
 	const found = vscode.debug.breakpoints.filter(bp => {
 		if (bp instanceof vscode.SourceBreakpoint) {
 			const bpline = bp.location.range.start.line;

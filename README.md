@@ -1,71 +1,41 @@
 # yeetpoint README
 
-This is the README for your extension "yeetpoint". After writing up a brief description, we recommend including the following sections.
+A VS Code extension for more efficiently working with breakpoints. This is specifically useful if you have large files and methods to work on. If that's the case, that's a smell. You should use this tool to refactor your code to the point were this tool is mostly irrelevant :)
+
+This current implementation is not under test.
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+All commands are found and executed through the VS Code Command Palette
 
-For example if there is an image subfolder under your extension project workspace:
+`Shift + Command + P` (Mac)
 
-\!\[feature X\]\(images/feature-x.png\)
+`Ctrl + Shift + P` (Windows/Linux)
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+#### Commands
 
-## Requirements
+`yeetpoint: add breakpoints by regex`
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+`yeetpoint: remove breakpoints by regex`
 
-## Extension Settings
+`yeetpoint: remove breakpoints below current line`
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+`yeetpoint: remove breakpoints above current line`
 
-For example:
 
-This extension contributes the following settings:
+## Notes About Memory Usage
 
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
+When finding lines to insert breakpoints through regex, this extension will chunk the page contents and find matching lines while moving chunk by chunk, not loading the entire thing in memory. VS Code can already be a resource hog and I didn't want to contribute more to that. If Code can load your file to begin with, it shouldn't have much issue inserting breakpoints outside of obscenely large edge cases.
+
+All other commands use the current active file, which already stores breakpoint information, so no extra memory is needed outside of a few temp variables :)
+
 
 ## Known Issues
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+N/A....for now 👀
 
 ## Release Notes
 
-Users appreciate release notes as you update your extension.
+### 0.0.1
 
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
----
-
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+Hiya! 👋

@@ -1,5 +1,6 @@
 {
   "name": "yeetpoint",
+  "publisher": "teemal",
   "displayName": "yeetPoint",
   "description": "An extension for working with breakpoints more efficiently.",
   "version": "0.0.1",
@@ -9,13 +10,17 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": ["*"],
+  "activationEvents": [],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "yeetpoint.regex",
-        "title": "yeetPoint: regex"
+        "command": "yeetpoint.addRegex",
+        "title": "yeetPoint: add breakpoints by regex"
+      },
+      {
+        "command": "yeetpoint.removeRegex",
+        "title": "yeetPoint: remove breakpoints by regex"
       }
     ]
   },

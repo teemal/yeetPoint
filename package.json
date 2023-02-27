@@ -34,6 +34,10 @@
       {
         "command": "yeetpoint.removeAboveCurrentLine",
         "title": "yeetpoint: remove breakpoints above current line"
+      },
+      {
+        "command": "yeetpoint.removeAll",
+        "title": "yeetpoint: remove all breakpoints"
       }
     ]
   },

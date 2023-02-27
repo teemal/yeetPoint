@@ -97,6 +97,16 @@ const findBreakPointsAboveBelowCurrentLine = async (aboveBelow: string) => {
 	}
 };
 
+const findAllBreakPoints = async () => {
+	let editor = vscode.window.activeTextEditor;
+	if (!editor) {
+		vscode.window.showInformationMessage('Open a file first to manipulate text selections');
+		return;
+	}
+	
+	return vscode.debug.breakpoints;
+};
+
 
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
@@ -148,6 +158,18 @@ export function activate(context: vscode.ExtensionContext) {
 			});
 	});
 	context.subscriptions.push(removeAboveCurrentLine);
+
+	let removeAll = vscode.commands.registerCommand('yeetpoint.removeAll', () => {
+		findAllBreakPoints()
+			.then((breakPoints) => {
+				if (!breakPoints) {
+					return;
+				}
+				console.log(breakPoints);
+				vscode.debug.removeBreakpoints(breakPoints);
+			});
+	});
+	context.subscriptions.push(removeAll);
 }
 
 // This method is called when your extension is deactivated

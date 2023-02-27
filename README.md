@@ -22,6 +22,8 @@ All commands are found and executed through the VS Code Command Palette
 
 `yeetpoint: remove breakpoints above current line`
 
+`yeetpoint: remove all breakpoints`
+
 
 ## Notes About Memory Usage
 
@@ -34,8 +36,3 @@ All other commands use the current active file, which already stores breakpoint 
 
 N/A....for now 👀
 
-## Release Notes
-
-### 0.0.1
-
-Hiya! 👋
